@@ -1,0 +1,7 @@
+{
+  "name": "MasterMusic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

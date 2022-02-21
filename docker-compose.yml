@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  facialemotion:
+    build:
+      context: FacialEmotionRecognition/
+      dockerfile: Dockerfile
+      args:
+        - APP_NAME=FacialEmotionRecognition
+        - ENV=development
+    image: mastermusic-emotion-recognition
+    volumes:
+      - /var/www/MasterMusic/FacialEmotionRecognition:/var/www/FacialEmotionRecognition
+    ports:
+      - 5000:5000
+
+  genderclassifier:
+    build:
+      context: MusicGenderClassifier/
+      dockerfile: Dockerfile
+      args:
+        - APP_NAME=MusicGenderClassifier
+        - ENV=development
+    image: mastermusic-music-classifier
+    volumes:
+      - /var/www/MasterMusic/MusicGenderClassifier:/var/www/MusicGenderClassifier
+    ports:
+      - 5001:5000
+
+  searchengine:
+    build:
+      context: SearchEngine/
+      dockerfile: Dockerfile
+      args:
+        - APP_NAME=SearchEngine
+        - ENV=development
+    image: mastermusic-searcher
+    volumes:
+      - /var/www/MasterMusic/SearchEngine:/var/www/SearchEngine
+    ports:
+      - 5002:5000

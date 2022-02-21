@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  app:
+    user: '1000:1000'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mastermusic
+    volumes:
+      - /var/www/MasterMusic/MasterMusic:/var/www
+    ports:
+      - 8200:8200
