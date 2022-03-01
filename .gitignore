@@ -3,3 +3,4 @@ MusicGenderClassifier/__pycache__
 SearchEngine/__pycache__
 conf/logs/*.log
 conf/logs/*.pid
+data
