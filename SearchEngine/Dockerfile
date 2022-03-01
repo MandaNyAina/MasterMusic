@@ -1,15 +1,24 @@
-FROM python:3.11.0a5-buster
+# Common build stage
+FROM node:14-alpine3.14 as common-build-stage
 
-ARG APP_NAME=MyApp
-ARG ENV=development
+COPY . ./app
 
-COPY . /var/www/${APP_NAME}/
-WORKDIR /var/www/${APP_NAME}
+WORKDIR /app
 
-RUN pip3 install --no-cache-dir -r requirements.txt \
-    && export FLASK_APP=${APP_NAME} \
-    && export FLASK_ENV=${ENV}
+RUN npm install
 
-EXPOSE 5000
+EXPOSE 3000
 
-CMD [ "flask", "run", "--host=0.0.0.0" ]
+# Development build stage
+FROM common-build-stage as development-build-stage
+
+ENV NODE_ENV development
+
+CMD ["npm", "run", "dev"]
+
+# Production build stage
+FROM common-build-stage as production-build-stage
+
+ENV NODE_ENV production
+
+CMD ["npm", "run", "start"]

@@ -15,9 +15,12 @@
 ## Definition des ports
 
 - 8200 : Ionic (Version dev)
+- 3000 : serveur backend (reverse proxy) 
 - 5000 : Service du decteur d'emotion
 - 5001 : Service de classification du musique
-- 5002 : Service de recherche 
+- 5002 : Service de recherche avance
+- 27017 : Base de donnees Mongo
+
 
 ## Techno
 
@@ -31,3 +34,8 @@ Serveur :
 
 - Python
 - Flask
+- NodeJS
+
+DB :
+
+- MongoDB

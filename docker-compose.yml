@@ -44,11 +44,27 @@ services:
     build:
       context: SearchEngine/
       dockerfile: Dockerfile
+      target: development-build-stage
       args:
         - APP_NAME=SearchEngine
-        - ENV=development
     image: mastermusic-searcher
     volumes:
-      - /var/www/MasterMusic/SearchEngine:/var/www/SearchEngine
+      - /var/www/MasterMusic/SearchEngine:/app
     ports:
-      - 5002:5000
+      - 5002:3000
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /var/www/MasterMusic/data:/data/db
+    command: mongod --quiet --logpath /dev/null 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
